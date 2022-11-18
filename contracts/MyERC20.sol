@@ -1,17 +1,9 @@
-// SPDX-License-Identifier: SEE LICENSE IN LICENSE
+// SPDX-License-Identifier: MIT
 
-pragma solidity ^0.8;
+pragma solidity ^0.8.0;
 
-contract MyERC20{
-    uint256 _totalSupply;
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
-    function totalSupply() public view returns(uint256){
-        return _totalSupply;
-    }
-
-    function balaceOf(address _owner) public view returns(uint256 balance){
-        
-    }
+contract MyERC20 is ERC20 {
+    constructor() ERC20("MyToken", "MTK") {}
 }
-
-
