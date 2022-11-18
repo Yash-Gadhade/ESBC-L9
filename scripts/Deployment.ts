@@ -18,7 +18,7 @@ async function main() {
 
     const mintTx = await erc20TokenContract.mint(accounts[0].address, 10);
     await mintTx.wait();
-    erc20TokenContract.grantRole()
+   
 
     const transferTx = await erc20TokenContract.transfer(accounts[1].address, 1);
     await transferTx.wait();

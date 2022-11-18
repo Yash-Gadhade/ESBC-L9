@@ -2,9 +2,10 @@ import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
 import { expect } from "chai";
 import { ethers } from "hardhat";
 import { MyERC20, MyERC20__factory } from "../typechain-types";
+import { PromiseOrValue } from "../typechain-types/common";
 
 describe("Basic tests for understanding ERC20", async () => {
-    let accounts;
+    let accounts: SignerWithAddress[];
     let erc20TokenContract: MyERC20;
     beforeEach(async () => {
         accounts = await ethers.getSigners();
@@ -19,6 +20,10 @@ describe("Basic tests for understanding ERC20", async () => {
     });
 
     it("triggers the Transfer event with the address of the sender when sending transcation", async function () {
-
+        const mintTx = await erc20TokenContract.mint(accounts[0].address, 10);
+        await mintTx.wait();
+        await expect(erc20TokenContract.transfer(accounts[1].address, 1))
+            .to.emit(erc20TokenContract, "Transfer")
+            .withArgs(accounts[0].address,accounts[1].address,1);
     });
 })
